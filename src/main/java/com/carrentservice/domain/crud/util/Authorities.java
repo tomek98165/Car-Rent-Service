@@ -1,4 +1,4 @@
-package com.rentcarservice.RenCarService.crud.util;
+package com.carrentservice.domain.crud.util;
 
 public enum Authorities {
     EMPLOYEE,

@@ -8,10 +8,10 @@
 		<version>3.4.3</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.rentcarservice</groupId>
-	<artifactId>RenCarService</artifactId>
+	<groupId>com.carrentservice</groupId>
+	<artifactId>CarRentService</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>RenCarService</name>
+	<name>CarRentService</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
@@ -28,6 +28,8 @@
 	</scm>
 	<properties>
 		<java.version>17</java.version>
+		<assertj-core.version>3.27.3</assertj-core.version>
+		<junit-jupiter-api.version>5.12.0</junit-jupiter-api.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -45,13 +47,24 @@
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
-			<groupId>org.projectlombok</groupId>
-			<artifactId>lombok</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- ASSERTJ -->
+		<!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+		<dependency>
+			<groupId>org.assertj</groupId>
+			<artifactId>assertj-core</artifactId>
+			<version>${assertj-core.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<!-- JUnit 5 -->
+		<!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+		<dependency>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>${junit-jupiter-api.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
