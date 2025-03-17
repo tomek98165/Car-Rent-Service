@@ -41,7 +41,7 @@ class CarRetriever {
                 car.isAvailability());
     }
 
-    CarDto findCarByVin(final char[] vin) {
+    CarDto findCarByVin(final String vin) {
         Car car = carRepository.findByVin(vin)
                 .orElseThrow(() -> new CarNotFoundException("id: " + vin));
         return new CarDto(car.getId(),

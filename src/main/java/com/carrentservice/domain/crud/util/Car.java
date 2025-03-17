@@ -12,7 +12,7 @@ class Car{
     private String make;
     private String model;
     @Column(unique = true, length = 17)
-    private char[] vin;
+    private String vin;
     private String description;
     private int year;
     private boolean availability;
@@ -41,11 +41,11 @@ class Car{
         this.model = model;
     }
 
-    public char[] getVin() {
+    public String getVin() {
         return vin;
     }
 
-    public void setVin(char[] vin) {
+    public void setVin(String vin) {
         this.vin = vin;
     }
 
@@ -73,7 +73,7 @@ class Car{
         this.availability = availability;
     }
 
-    Car(String make, String model, char[] vin, String description, int year, boolean availability) {
+    Car(String make, String model, String vin, String description, int year, boolean availability) {
         this.make = make;
         this.model = model;
         this.vin = vin;
@@ -85,7 +85,7 @@ class Car{
     public Car() {
     }
 
-    public Car(Long id, String make, String model, char[] vin, String description, int year, boolean availability) {
+    public Car(Long id, String make, String model, String vin, String description, int year, boolean availability) {
         this.id = id;
         this.make = make;
         this.model = model;

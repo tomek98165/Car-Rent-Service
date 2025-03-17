@@ -41,7 +41,7 @@ public class CarRestController {
         return ResponseEntity.ok(carRentServiceCrudFacade.findCarById(id));
     }
     @GetMapping("/vin/{vin}")
-    ResponseEntity<CarDto> getCarByVin(@PathVariable char[] vin){
+    ResponseEntity<CarDto> getCarByVin(@PathVariable String vin){
         return ResponseEntity.ok(carRentServiceCrudFacade.findCarByVin(vin));
     }
     @GetMapping("/{make}/{model}")

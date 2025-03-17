@@ -35,7 +35,7 @@ public class CarRentServiceCrudFacade {
     public CarDto findCarById(Long id){
         return carRetriever.findCarById(id);
     }
-    public CarDto findCarByVin(char[] vin){
+    public CarDto findCarByVin(String vin){
         return carRetriever.findCarByVin(vin);
     }
 

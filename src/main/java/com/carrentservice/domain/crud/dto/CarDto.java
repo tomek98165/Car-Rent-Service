@@ -4,7 +4,7 @@ public record CarDto(
         Long id,
         String make,
         String model,
-        char[] vin,
+        String vin,
         String description,
         int year,
         boolean availability
