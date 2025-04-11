@@ -6,7 +6,6 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 class CarAdder {
     private final CarRepository carRepository;
 
@@ -15,20 +14,8 @@ class CarAdder {
     }
 
     CarDto addCar(final CarRequestDto carRequestDto){
-        Car newCar = new Car(
-                carRequestDto.make(),
-                carRequestDto.model(),
-                carRequestDto.vin(),
-                carRequestDto.description(),
-                carRequestDto.year(),
-                carRequestDto.availability());
+        Car newCar = CarMapper.CarRequestDtoToCar(carRequestDto);
         Car savedCar = carRepository.save(newCar);
-        return new CarDto(savedCar.getId(),
-                savedCar.getMake(),
-                savedCar.getModel(),
-                savedCar.getVin(),
-                savedCar.getDescription(),
-                savedCar.getYear(),
-                savedCar.isAvailability());
+        return CarMapper.CarToCartDto(savedCar);
     }
 }

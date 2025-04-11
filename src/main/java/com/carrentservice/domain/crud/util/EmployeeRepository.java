@@ -1,6 +1,5 @@
 package com.carrentservice.domain.crud.util;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-import org.springframework.data.repository.Repository;
-
-public interface EmployeeRepository extends Repository<Employee, Long> {
+interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

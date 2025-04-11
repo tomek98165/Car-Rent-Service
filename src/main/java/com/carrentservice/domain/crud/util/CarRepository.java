@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 interface CarRepository extends JpaRepository<Car, Long> {
     List<Car> findAllByAvailabilityIsTrue(Pageable pageable);
-    Optional<Car> findByVin(String vin);
+    Optional<Car> findByLicensePlate(String licensePlate);
 
     List<Car> findAllByMakeAndModel(String make, String model);
 

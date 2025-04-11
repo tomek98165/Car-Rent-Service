@@ -1,6 +1,9 @@
 package com.carrentservice.domain.crud.util;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface CustomerRepository extends Repository<Customer, Long> {
+@Repository
+interface CustomerRepository extends JpaRepository<Customer, Long> {
+
 }

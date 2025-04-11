@@ -18,66 +18,33 @@ class CarRetriever {
     Set<CarDto> findAllCars(Pageable pageable){
         return carRepository.findAll(pageable)
                 .stream()
-                    .map(car -> new CarDto(
-                            car.getId(),
-                            car.getMake(),
-                            car.getModel(),
-                            car.getVin(),
-                            car.getDescription(),
-                            car.getYear(),
-                            car.isAvailability()))
+                    .map(CarMapper::CarToCartDto)
                     .collect(Collectors.toSet());
     }
 
     CarDto findCarById(final Long id) {
         Car car = carRepository.findById(id)
                 .orElseThrow(() -> new CarNotFoundException("id: " + id));
-        return new CarDto(car.getId(),
-                car.getMake(),
-                car.getModel(),
-                car.getVin(),
-                car.getDescription(),
-                car.getYear(),
-                car.isAvailability());
+        return CarMapper.CarToCartDto(car);
     }
 
-    CarDto findCarByVin(final String vin) {
-        Car car = carRepository.findByVin(vin)
-                .orElseThrow(() -> new CarNotFoundException("id: " + vin));
-        return new CarDto(car.getId(),
-                car.getMake(),
-                car.getModel(),
-                car.getVin(),
-                car.getDescription(),
-                car.getYear(),
-                car.isAvailability());
+    CarDto findCarByLicensePlate(final String licensePlate) {
+        Car car = carRepository.findByLicensePlate(licensePlate)
+                .orElseThrow(() -> new CarNotFoundException("licencePlate: " + licensePlate));
+        return CarMapper.CarToCartDto(car);
     }
 
     Set<CarDto> findAllAvailableCars(Pageable pageable){
         return carRepository.findAllByAvailabilityIsTrue(pageable)
                 .stream()
-                .map(car -> new CarDto(
-                        car.getId(),
-                        car.getMake(),
-                        car.getModel(),
-                        car.getVin(),
-                        car.getDescription(),
-                        car.getYear(),
-                        car.isAvailability()))
+                .map(CarMapper::CarToCartDto)
                 .collect(Collectors.toSet());
     }
 
     Set<CarDto> findAllCarsByMakeAndModel(String make, String model){
         return carRepository.findAllByMakeAndModel(make,model)
                 .stream()
-                .map(car -> new CarDto(
-                        car.getId(),
-                        car.getMake(),
-                        car.getModel(),
-                        car.getVin(),
-                        car.getDescription(),
-                        car.getYear(),
-                        car.isAvailability()))
+                .map(CarMapper::CarToCartDto)
                 .collect(Collectors.toSet());
     }
 }

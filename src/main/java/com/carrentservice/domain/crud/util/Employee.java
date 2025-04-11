@@ -16,28 +16,25 @@ class Employee {
     private String username;
     private String password;
     private List<Authorities> authorities;
-    boolean active;
 
     public Employee() {
     }
 
-    public Employee(String name, String lastName, String username, String password, List<Authorities> authorities, boolean active) {
+    public Employee(String name, String lastName, String username, String password) {
         this.name = name;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
-        this.active = active;
+
     }
 
-    public Employee(Long id, String name, String lastName, String username, String password, List<Authorities> authorities, boolean active) {
+    public Employee(Long id, String name, String lastName, String username, String password, List<Authorities> authorities) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
-        this.active = active;
     }
 
     public Long getId() {
@@ -88,11 +85,4 @@ class Employee {
         this.authorities = authorities;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
