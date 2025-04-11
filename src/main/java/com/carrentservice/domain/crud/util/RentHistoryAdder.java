@@ -13,7 +13,7 @@ class RentHistoryAdder {
     private final CustomerRetriever customerRetriever;
 
 
-    public RentHistoryAdder(RentHistoryRepository rentHistoryRepository, CarRetriever carRetriever, CarUpdater carUpdater, EmployeeRetriever employeeRetriever, CustomerRetriever customerRetriever) {
+    RentHistoryAdder(RentHistoryRepository rentHistoryRepository, CarRetriever carRetriever, CarUpdater carUpdater, EmployeeRetriever employeeRetriever, CustomerRetriever customerRetriever) {
         this.rentHistoryRepository = rentHistoryRepository;
         this.carRetriever = carRetriever;
         this.carUpdater = carUpdater;

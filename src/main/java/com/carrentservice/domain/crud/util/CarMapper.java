@@ -3,9 +3,9 @@ package com.carrentservice.domain.crud.util;
 import com.carrentservice.domain.crud.dto.CarDto;
 import com.carrentservice.domain.crud.dto.CarRequestDto;
 
-public class CarMapper {
+class CarMapper {
 
-    public static Car carDtoToCar(CarDto carDto){
+    static Car carDtoToCar(CarDto carDto){
         return new Car(
                 carDto.id(),
                 carDto.make(),
@@ -16,7 +16,7 @@ public class CarMapper {
                 carDto.availability());
     }
 
-    public static Car CarRequestDtoToCar(CarRequestDto carDto){
+    static Car CarRequestDtoToCar(CarRequestDto carDto){
         return new Car(
                 carDto.make(),
                 carDto.model(),
@@ -26,7 +26,7 @@ public class CarMapper {
                 carDto.availability());
     }
 
-    public static CarDto CarToCartDto(Car car) {
+    static CarDto CarToCartDto(Car car) {
         return new CarDto(
                 car.getId(),
                 car.getMake(),

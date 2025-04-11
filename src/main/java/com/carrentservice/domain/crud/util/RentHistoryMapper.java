@@ -3,9 +3,9 @@ package com.carrentservice.domain.crud.util;
 import com.carrentservice.domain.crud.dto.RentHistoryWithDataDto;
 import com.carrentservice.domain.crud.dto.RentHistoryWithRentDataDto;
 
-public class RentHistoryMapper {
+class RentHistoryMapper {
 
-    public static RentHistoryWithDataDto rentHistoryToRentHistoryWithDataDto(RentHistory rentHistory){
+    static RentHistoryWithDataDto rentHistoryToRentHistoryWithDataDto(RentHistory rentHistory){
         return new RentHistoryWithDataDto(
                 rentHistory.getId(),
                 CarMapper.CarToCartDto(rentHistory.getCar()),
@@ -15,7 +15,7 @@ public class RentHistoryMapper {
                 rentHistory.getRentDate(),
                 rentHistory.getReturnDate());
     }
-    public static RentHistoryWithRentDataDto rentHistoryToRentHistoryWithRentDataDto(RentHistory rentHistory){
+    static RentHistoryWithRentDataDto rentHistoryToRentHistoryWithRentDataDto(RentHistory rentHistory){
         return new RentHistoryWithRentDataDto(
                 rentHistory.getId(),
                 CarMapper.CarToCartDto(rentHistory.getCar()),
@@ -25,7 +25,7 @@ public class RentHistoryMapper {
 
     }
 
-    public static RentHistory rentHistoryWithDataToRentHistory(RentHistoryWithDataDto rentHistoryWithDataDto) {
+    static RentHistory rentHistoryWithDataToRentHistory(RentHistoryWithDataDto rentHistoryWithDataDto) {
         return new RentHistory(
                 rentHistoryWithDataDto.id(),
                 CarMapper.carDtoToCar(rentHistoryWithDataDto.carDto()),

@@ -33,19 +33,6 @@ class Customer {
    public Customer() {
    }
 
-   public Customer(Long id, String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
-      this.id = id;
-      this.name = name;
-      this.lastName = lastName;
-      this.address = address;
-      this.zipCode = zipCode;
-      this.town = town;
-      this.pesel = pesel;
-      this.birthDate = birthDate;
-      Gender = gender;
-      this.phoneNumber = phoneNumber;
-      this.email = email;
-   }
 
    public Customer(String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
       this.name = name;

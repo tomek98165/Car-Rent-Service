@@ -3,7 +3,7 @@ package com.carrentservice.domain.crud.util;
 import com.carrentservice.domain.crud.dto.CustomerDto;
 import com.carrentservice.domain.crud.dto.CustomerRequestDto;
 
-public class CustomerMapper {
+class CustomerMapper {
 
     static Customer customerRequestDtoToCustomer(CustomerRequestDto customerDto){
         return new Customer(

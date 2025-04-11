@@ -4,13 +4,13 @@ import com.carrentservice.domain.crud.dto.CustomerDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerUpdater {
+class CustomerUpdater {
 
     private final CustomerRepository customerRepository;
     private final CustomerRetriever customerRetriever;
 
 
-    public CustomerUpdater(CustomerRepository customerRepository, CustomerRetriever customerRetriever) {
+    CustomerUpdater(CustomerRepository customerRepository, CustomerRetriever customerRetriever) {
         this.customerRepository = customerRepository;
         this.customerRetriever = customerRetriever;
     }

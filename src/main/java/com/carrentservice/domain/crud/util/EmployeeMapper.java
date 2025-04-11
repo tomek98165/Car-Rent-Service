@@ -5,7 +5,7 @@ import com.carrentservice.domain.crud.dto.EmployeeRequestDto;
 
 public class EmployeeMapper {
 
-    public static Employee EmployeeDtoToEmployee(EmployeeDto employeeDto) {
+    static Employee EmployeeDtoToEmployee(EmployeeDto employeeDto) {
         return new Employee(
                 employeeDto.id(),
                 employeeDto.name(),
@@ -15,14 +15,14 @@ public class EmployeeMapper {
                 employeeDto.authorities());
     }
 
-    public static Employee EmployeeRequestDtoToEmployee(EmployeeRequestDto employeeDto) {
+    static Employee EmployeeRequestDtoToEmployee(EmployeeRequestDto employeeDto) {
         return new Employee(
                 employeeDto.name(),
                 employeeDto.lastName(),
                 employeeDto.username(),
                 employeeDto.password());
     }
-    public static EmployeeDto EmployeeToEmployeeDto(Employee employee) {
+    static EmployeeDto EmployeeToEmployeeDto(Employee employee) {
         return new EmployeeDto(
                 employee.getId(),
                 employee.getName(),

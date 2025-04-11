@@ -13,12 +13,11 @@ class CarUpdater {
         this.carRetriever = carRetriever;
     }
 
-    public CarDto changeAvailabilityCar(Long id){
+    public void changeAvailabilityCar(Long id){
         CarDto car = carRetriever.findCarById(id);
         Car updateCar = CarMapper.carDtoToCar(car);
         updateCar.setAvailability(!updateCar.isAvailability());
         Car updatedCar = carRepository.save(updateCar);
-        return CarMapper.CarToCartDto(updatedCar);
     }
 
 

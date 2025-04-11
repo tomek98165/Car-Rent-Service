@@ -18,6 +18,7 @@ class EmployeeUpdater {
     EmployeeDto setAuthorities(long id, List<Authorities> authorities){
         Employee employee = EmployeeMapper.EmployeeDtoToEmployee(employeeRetriever.findEmployeeById(id));
         employee.setAuthorities(authorities);
-        return EmployeeMapper.EmployeeToEmployeeDto(employee);
+        Employee updatedEmployee = employeeRepository.save(employee);
+        return EmployeeMapper.EmployeeToEmployeeDto(updatedEmployee);
     }
 }

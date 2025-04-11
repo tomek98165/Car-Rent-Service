@@ -5,11 +5,11 @@ import com.carrentservice.domain.crud.dto.CustomerRequestDto;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerAdder {
+class CustomerAdder {
 
     private final CustomerRepository customerRepository;
 
-    public CustomerAdder(CustomerRepository customerRepository) {
+    CustomerAdder(CustomerRepository customerRepository) {
         this.customerRepository = customerRepository;
     }
 

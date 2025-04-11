@@ -20,7 +20,7 @@ class CustomerRetriever {
         return CustomerMapper.customerToCustomerDto(customer);
     }
     Set<CustomerDto> findAllCustomers(){
-        return customerRepository.findAll().stream().map(customer -> CustomerMapper.customerToCustomerDto(customer))
+        return customerRepository.findAll().stream().map(CustomerMapper::customerToCustomerDto)
                 .collect(Collectors.toSet());
     }
     String getNameFromId(Long id){

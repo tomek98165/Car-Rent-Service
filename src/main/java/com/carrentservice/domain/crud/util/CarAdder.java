@@ -2,7 +2,6 @@ package com.carrentservice.domain.crud.util;
 
 import com.carrentservice.domain.crud.dto.CarDto;
 import com.carrentservice.domain.crud.dto.CarRequestDto;
-import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 @Service
