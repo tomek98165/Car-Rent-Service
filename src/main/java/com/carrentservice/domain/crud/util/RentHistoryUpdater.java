@@ -9,12 +9,12 @@ import java.time.Instant;
 
 @Service
 @Transactional
-class RentHistoryUpdate {
+class RentHistoryUpdater {
     private final RentHistoryRepository rentHistoryRepository;
     private final RentHistoryRetriever rentHistoryRetriever;
     private final CarUpdater carUpdater;
 
-    RentHistoryUpdate(RentHistoryRepository rentHistoryRepository, RentHistoryRetriever rentHistoryRetriever, CarUpdater carUpdater) {
+    RentHistoryUpdater(RentHistoryRepository rentHistoryRepository, RentHistoryRetriever rentHistoryRetriever, CarUpdater carUpdater) {
         this.rentHistoryRepository = rentHistoryRepository;
         this.rentHistoryRetriever = rentHistoryRetriever;
         this.carUpdater = carUpdater;

@@ -2,6 +2,7 @@ package com.carrentservice.domain.crud.util;
 
 import com.carrentservice.domain.crud.dto.RentHistoryWithDataDto;
 import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -12,7 +13,6 @@ import java.util.stream.Collectors;
 class RentHistoryRetriever {
     private final RentHistoryRepository rentHistoryRepository;
 
-
     RentHistoryRetriever(RentHistoryRepository rentHistoryRepository) {
         this.rentHistoryRepository = rentHistoryRepository;
     }
@@ -22,35 +22,31 @@ class RentHistoryRetriever {
                 .orElseThrow(() -> new RentHistoryNotFoundException("id: " + id));
         return RentHistoryMapper.rentHistoryToRentHistoryWithDataDto(rentHistory);
     }
-
-    Set<RentHistoryWithDataDto> findAllRentHistory(){
-        return rentHistoryRepository.findAll().stream()
+    Set<RentHistoryWithDataDto> findAllRentHistory(Pageable pageable){
+        return rentHistoryRepository.findAll(pageable).stream()
                 .map(RentHistoryMapper::rentHistoryToRentHistoryWithDataDto)
                 .collect(Collectors.toSet());
     }
-
-    Set<RentHistoryWithDataDto> findALlRentHistoryWithRentedCars(){
-        return rentHistoryRepository.findByReturnDateIsNull().stream()
+    Set<RentHistoryWithDataDto> findALlRentHistoryWithRentedCars(Pageable pageable){
+        return rentHistoryRepository.findByReturnDateIsNull(pageable).stream()
                 .map(RentHistoryMapper::rentHistoryToRentHistoryWithDataDto)
                 .collect(Collectors.toSet());
     }
-
-    Set<RentHistoryWithDataDto> findRentHistoryByCustomerId(Long id){
-        return rentHistoryRepository.findByCustomerId(id).stream()
+    Set<RentHistoryWithDataDto> findRentHistoryByCustomerId(Long id, Pageable pageable){
+        return rentHistoryRepository.findByCustomerId(id, pageable).stream()
                 .map(RentHistoryMapper::rentHistoryToRentHistoryWithDataDto)
                 .collect(Collectors.toSet());
     }
-    Set<RentHistoryWithDataDto> findNotReturnedCarsByCustomerId(Long id){
-        return rentHistoryRepository.findByCustomerIdAndReturnDateIsNull(id).stream()
+    Set<RentHistoryWithDataDto> findNotReturnedCarsByCustomerId(Long id, Pageable pageable){
+        return rentHistoryRepository.findByCustomerIdAndReturnDateIsNull(id, pageable).stream()
                 .map(RentHistoryMapper::rentHistoryToRentHistoryWithDataDto)
                 .collect(Collectors.toSet());
     }
-    Set<RentHistoryWithDataDto> findRentHistoryByCarId(Long id){
-        return rentHistoryRepository.findByCarId(id).stream()
+    Set<RentHistoryWithDataDto> findRentHistoryByCarId(Long id, Pageable pageable){
+        return rentHistoryRepository.findByCarId(id, pageable).stream()
                 .map(RentHistoryMapper::rentHistoryToRentHistoryWithDataDto)
                 .collect(Collectors.toSet());
     }
-
     RentHistoryWithDataDto findLastReturnHistoryByCarId(Long id){
         RentHistory rentHistory = rentHistoryRepository.findTopByCarIdOrderByReturnDateDesc(id)
                 .orElseThrow(()-> new RentHistoryNotFoundException("id: " + id));

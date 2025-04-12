@@ -3,7 +3,7 @@ package com.carrentservice.domain.crud.util;
 import com.carrentservice.domain.crud.dto.EmployeeDto;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 class EmployeeUpdater {
@@ -15,7 +15,7 @@ class EmployeeUpdater {
         this.employeeRetriever = employeeRetriever;
     }
 
-    EmployeeDto setAuthorities(long id, List<Authorities> authorities){
+    EmployeeDto setAuthorities(long id, Set<Authorities> authorities){
         Employee employee = EmployeeMapper.EmployeeDtoToEmployee(employeeRetriever.findEmployeeById(id));
         employee.setAuthorities(authorities);
         Employee updatedEmployee = employeeRepository.save(employee);

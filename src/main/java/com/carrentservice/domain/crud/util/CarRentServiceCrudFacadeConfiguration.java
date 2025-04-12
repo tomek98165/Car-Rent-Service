@@ -20,7 +20,7 @@ class CarRentServiceCrudFacadeConfiguration {
 
         RentHistoryRetriever rentHistoryRetriever = new RentHistoryRetriever(rentHistoryRepository);
         RentHistoryAdder rentHistoryAdder = new RentHistoryAdder(rentHistoryRepository, carRetriever, carUpdater, employeeRetriever, customerRetriever);
-        RentHistoryUpdate rentHistoryUpdate = new RentHistoryUpdate(rentHistoryRepository, rentHistoryRetriever, carUpdater);
+        RentHistoryUpdater rentHistoryUpdate = new RentHistoryUpdater(rentHistoryRepository, rentHistoryRetriever, carUpdater);
 
         return new CarRentServiceCrudFacade(
                 carAdder,

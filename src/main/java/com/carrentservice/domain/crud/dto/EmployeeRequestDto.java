@@ -2,14 +2,14 @@ package com.carrentservice.domain.crud.dto;
 
 import com.carrentservice.domain.crud.util.Authorities;
 
-import java.util.List;
+import java.util.Set;
 
 public record EmployeeRequestDto(
         String name,
         String lastName,
         String username,
         String password,
-        List<Authorities> authorities
+        Set<Authorities> authorities
 
 ) {
 

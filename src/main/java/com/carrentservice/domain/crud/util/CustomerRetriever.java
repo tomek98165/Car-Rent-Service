@@ -1,6 +1,7 @@
 package com.carrentservice.domain.crud.util;
 
 import com.carrentservice.domain.crud.dto.CustomerDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -19,8 +20,8 @@ class CustomerRetriever {
                 .orElseThrow(() -> new CustomerNotFoundException("id: " + id));
         return CustomerMapper.customerToCustomerDto(customer);
     }
-    Set<CustomerDto> findAllCustomers(){
-        return customerRepository.findAll().stream().map(CustomerMapper::customerToCustomerDto)
+    Set<CustomerDto> findAllCustomers(Pageable pageable){
+        return customerRepository.findAll(pageable).stream().map(CustomerMapper::customerToCustomerDto)
                 .collect(Collectors.toSet());
     }
     CustomerDto findCustomerByPesel(String pesel){

@@ -2,8 +2,7 @@ package com.carrentservice.domain.crud.util;
 
 import jakarta.persistence.*;
 
-
-import java.util.List;
+import java.util.Set;
 
 @Entity
 class Employee {
@@ -15,7 +14,7 @@ class Employee {
     @Column(unique = true)
     private String username;
     private String password;
-    private List<Authorities> authorities;
+    private Set<Authorities> authorities;
 
     public Employee() {
     }
@@ -28,7 +27,7 @@ class Employee {
 
     }
 
-    public Employee(Long id, String name, String lastName, String username, String password, List<Authorities> authorities) {
+    public Employee(Long id, String name, String lastName, String username, String password, Set<Authorities> authorities) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -77,11 +76,11 @@ class Employee {
         this.password = password;
     }
 
-    public List<Authorities> getAuthorities() {
+    public Set<Authorities> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<Authorities> authorities) {
+    public void setAuthorities(Set<Authorities> authorities) {
         this.authorities = authorities;
     }
 

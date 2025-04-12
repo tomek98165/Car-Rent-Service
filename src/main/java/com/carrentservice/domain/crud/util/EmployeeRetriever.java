@@ -1,6 +1,7 @@
 package com.carrentservice.domain.crud.util;
 
 import com.carrentservice.domain.crud.dto.EmployeeDto;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.Set;
@@ -15,8 +16,8 @@ class EmployeeRetriever {
     }
 
 
-    Set<EmployeeDto> findAllEmployees(){
-        return employeeRepository.findAll()
+    Set<EmployeeDto> findAllEmployees(Pageable pageable){
+        return employeeRepository.findAll(pageable)
                 .stream()
                 .map(EmployeeMapper::EmployeeToEmployeeDto)
                 .collect(Collectors.toSet());
