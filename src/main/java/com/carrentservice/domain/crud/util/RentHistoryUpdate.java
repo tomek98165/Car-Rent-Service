@@ -20,7 +20,7 @@ class RentHistoryUpdate {
         this.carUpdater = carUpdater;
     }
 
-    RentHistoryWithDataDto returnCar(RentHistoryReturnRequestDto rentHistoryReturnRequestDto){
+    RentHistoryWithDataDto returnCar(RentHistoryReturnRequestDto rentHistoryReturnRequestDto) throws RentHistoryCarAvailableException {
         RentHistoryWithDataDto data = rentHistoryRetriever.findRentHistoryById(rentHistoryReturnRequestDto.id());
         if(data.returnDate() == null){
             RentHistory rentedCar = RentHistoryMapper.rentHistoryWithDataToRentHistory(data);
@@ -28,7 +28,7 @@ class RentHistoryUpdate {
             carUpdater.changeAvailabilityCar(rentedCar.getCar().getId());
             return RentHistoryMapper.rentHistoryToRentHistoryWithDataDto(rentHistoryRepository.save(rentedCar));
         }else{
-            throw new CarAlreadyReturnedException();
+            throw new RentHistoryCarAvailableException("Car already returned");
         }
     }
 }

@@ -21,19 +21,21 @@ class RentHistoryAdder {
         this.customerRetriever = customerRetriever;
     }
 
-    RentHistoryWithRentDataDto rentCar(RentHistoryRentRequestDto rentHistoryRequestDto){
+    RentHistoryWithRentDataDto rentCar(RentHistoryRentRequestDto rentHistoryRequestDto) throws RentHistoryCarAvailableException {
         CarDto car = carRetriever.findCarById(rentHistoryRequestDto.carId());
-        EmployeeDto employee = employeeRetriever.findEmployeeById(rentHistoryRequestDto.employeeRentId());
-        CustomerDto customer = customerRetriever.findCustomerById(rentHistoryRequestDto.customerId());
-        RentHistory rentHistory = new RentHistory(
-                CarMapper.carDtoToCar(car),
-                CustomerMapper.customerDtoToCustomer(customer),
-                EmployeeMapper.EmployeeDtoToEmployee(employee));
-        carUpdater.changeAvailabilityCar(car.id());
-        RentHistory newRentHistory = rentHistoryRepository.save(rentHistory);
-
-
-        return RentHistoryMapper.rentHistoryToRentHistoryWithRentDataDto(newRentHistory);
+        if(car.availability()) {
+            EmployeeDto employee = employeeRetriever.findEmployeeById(rentHistoryRequestDto.employeeRentId());
+            CustomerDto customer = customerRetriever.findCustomerById(rentHistoryRequestDto.customerId());
+            RentHistory rentHistory = new RentHistory(
+                    CarMapper.carDtoToCar(car),
+                    CustomerMapper.customerDtoToCustomer(customer),
+                    EmployeeMapper.EmployeeDtoToEmployee(employee));
+            carUpdater.changeAvailabilityCar(car.id());
+            RentHistory newRentHistory = rentHistoryRepository.save(rentHistory);
+            return RentHistoryMapper.rentHistoryToRentHistoryWithRentDataDto(newRentHistory);
+        }else{
+            throw new RentHistoryCarAvailableException("Car is not available");
+        }
 
     }
 }

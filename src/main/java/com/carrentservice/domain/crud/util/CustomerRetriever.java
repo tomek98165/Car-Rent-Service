@@ -23,10 +23,11 @@ class CustomerRetriever {
         return customerRepository.findAll().stream().map(CustomerMapper::customerToCustomerDto)
                 .collect(Collectors.toSet());
     }
-    String getNameFromId(Long id){
-        Customer customer = customerRepository.findById(id)
-                .orElseThrow(() -> new CustomerNotFoundException("id: " + id));
-
-        return customer.getName() + " " + customer.getLastName();
+    CustomerDto findCustomerByPesel(String pesel){
+        Customer customer = customerRepository.findCustomerByPesel(pesel)
+                .orElseThrow(() -> new CustomerNotFoundException("pesel: " + pesel));
+        return CustomerMapper.customerToCustomerDto(customer);
     }
+
+
 }

@@ -28,5 +28,11 @@ class EmployeeRetriever {
 
         return EmployeeMapper.EmployeeToEmployeeDto(employee);
     }
+    EmployeeDto findEmployeeByUsername(String username){
+        Employee employee = employeeRepository.findByUsername(username)
+                .orElseThrow(() -> new EmployeeNotFoundException("username: " + username));
+
+        return EmployeeMapper.EmployeeToEmployeeDto(employee);
+    }
 
 }

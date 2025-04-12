@@ -46,5 +46,12 @@ class CarRetriever {
                 .stream()
                 .map(CarMapper::CarToCartDto)
                 .collect(Collectors.toSet());
+    }    Set<CarDto> findAllCarsByMake(String make){
+        return carRepository.findAllByMake(make)
+                .stream()
+                .map(CarMapper::CarToCartDto)
+                .collect(Collectors.toSet());
     }
+
+
 }

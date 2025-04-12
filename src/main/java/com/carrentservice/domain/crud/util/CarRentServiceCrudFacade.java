@@ -2,6 +2,7 @@ package com.carrentservice.domain.crud.util;
 
 import com.carrentservice.domain.crud.dto.CarDto;
 import com.carrentservice.domain.crud.dto.CarRequestDto;
+import com.carrentservice.domain.crud.dto.CustomerDto;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -75,6 +76,16 @@ public class CarRentServiceCrudFacade {
         return carRetriever.findAllCarsByMakeAndModel(make, model);
     }
 
+
+    public CustomerDto findCustomerById(Long id){
+        return customerRetriever.findCustomerById(id);
+    }
+
+    public Set<CustomerDto> findAllCustomers(){
+        return customerRetriever.findAllCustomers();
+    }
+
+//    public
 
 
 
