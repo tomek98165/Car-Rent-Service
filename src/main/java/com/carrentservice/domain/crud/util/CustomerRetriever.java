@@ -21,11 +21,12 @@ class CustomerRetriever {
         return CustomerMapper.customerToCustomerDto(customer);
     }
     Set<CustomerDto> findAllCustomers(Pageable pageable){
-        return customerRepository.findAll(pageable).stream().map(CustomerMapper::customerToCustomerDto)
+        return customerRepository.findAll(pageable).stream()
+                .map(CustomerMapper::customerToCustomerDto)
                 .collect(Collectors.toSet());
     }
     CustomerDto findCustomerByPesel(String pesel){
-        Customer customer = customerRepository.findCustomerByPesel(pesel)
+        Customer customer = customerRepository.findByPesel(pesel)
                 .orElseThrow(() -> new CustomerNotFoundException("pesel: " + pesel));
         return CustomerMapper.customerToCustomerDto(customer);
     }

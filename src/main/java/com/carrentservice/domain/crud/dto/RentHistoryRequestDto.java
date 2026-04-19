@@ -1,6 +1,6 @@
 package com.carrentservice.domain.crud.dto;
 
-public record RentHistoryRentRequestDto(
+public record RentHistoryRequestDto(
         Long carId,
         Long customerId,
         Long employeeRentId

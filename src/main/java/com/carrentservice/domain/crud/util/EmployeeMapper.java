@@ -5,7 +5,10 @@ import com.carrentservice.domain.crud.dto.EmployeeRequestDto;
 
 public class EmployeeMapper {
 
+
     static Employee EmployeeDtoToEmployee(EmployeeDto employeeDto) {
+        if(employeeDto == null)
+            return null;
         return new Employee(
                 employeeDto.id(),
                 employeeDto.name(),
@@ -23,6 +26,9 @@ public class EmployeeMapper {
                 employeeDto.password());
     }
     static EmployeeDto EmployeeToEmployeeDto(Employee employee) {
+        if(employee == null)
+            return null;
+
         return new EmployeeDto(
                 employee.getId(),
                 employee.getName(),

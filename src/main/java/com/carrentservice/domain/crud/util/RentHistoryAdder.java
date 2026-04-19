@@ -11,17 +11,19 @@ class RentHistoryAdder {
     private final CarUpdater carUpdater;
     private final EmployeeRetriever employeeRetriever;
     private final CustomerRetriever customerRetriever;
+    private final TimeProvider timeProvider;
 
 
-    RentHistoryAdder(RentHistoryRepository rentHistoryRepository, CarRetriever carRetriever, CarUpdater carUpdater, EmployeeRetriever employeeRetriever, CustomerRetriever customerRetriever) {
+    RentHistoryAdder(RentHistoryRepository rentHistoryRepository, CarRetriever carRetriever, CarUpdater carUpdater, EmployeeRetriever employeeRetriever, CustomerRetriever customerRetriever, TimeProvider timeProvider) {
         this.rentHistoryRepository = rentHistoryRepository;
         this.carRetriever = carRetriever;
         this.carUpdater = carUpdater;
         this.employeeRetriever = employeeRetriever;
         this.customerRetriever = customerRetriever;
+        this.timeProvider = timeProvider;
     }
 
-    RentHistoryWithRentDataDto rentCar(RentHistoryRentRequestDto rentHistoryRequestDto) throws RentHistoryCarAvailableException {
+    RentHistoryWithRentDataDto rentCar(RentHistoryRequestDto rentHistoryRequestDto) throws RentHistoryCarAvailableException {
         CarDto car = carRetriever.findCarById(rentHistoryRequestDto.carId());
         if(car.availability()) {
             EmployeeDto employee = employeeRetriever.findEmployeeById(rentHistoryRequestDto.employeeRentId());
@@ -29,7 +31,8 @@ class RentHistoryAdder {
             RentHistory rentHistory = new RentHistory(
                     CarMapper.carDtoToCar(car),
                     CustomerMapper.customerDtoToCustomer(customer),
-                    EmployeeMapper.EmployeeDtoToEmployee(employee));
+                    EmployeeMapper.EmployeeDtoToEmployee(employee),
+                    timeProvider.now());
             carUpdater.changeAvailabilityCar(car.id());
             RentHistory newRentHistory = rentHistoryRepository.save(rentHistory);
             return RentHistoryMapper.rentHistoryToRentHistoryWithRentDataDto(newRentHistory);

@@ -20,7 +20,7 @@ class RentHistoryMapper {
                 rentHistory.getId(),
                 CarMapper.CarToCartDto(rentHistory.getCar()),
                 CustomerMapper.customerToCustomerDto(rentHistory.getCustomer()),
-                EmployeeMapper.EmployeeToEmployeeDto(rentHistory.getEmployeeReturn()),
+                EmployeeMapper.EmployeeToEmployeeDto(rentHistory.getEmployeeRent()),
                 rentHistory.getRentDate());
 
     }

@@ -75,6 +75,7 @@ public class CarRentServiceCrudFacade {
         return carRetriever.findAllCarsByMake(make);
     }
 
+
     //Customers
     public CustomerDto findCustomerById(Long id){
         return customerRetriever.findCustomerById(id);
@@ -91,6 +92,7 @@ public class CarRentServiceCrudFacade {
     public CustomerDto updateCustomer(CustomerDto customerDto){
         return customerUpdater.updateCustomer(customerDto);
     }
+
 
     //Employee
     public EmployeeDto findEmployeeById(Long id){
@@ -128,8 +130,8 @@ public class CarRentServiceCrudFacade {
     public Set<RentHistoryWithDataDto> findAllRentHistoryByCustomerId(Long id,Pageable pageable){
         return rentHistoryRetriever.findRentHistoryByCustomerId(id, pageable);
     }
-    public RentHistoryWithRentDataDto rentCar(RentHistoryRentRequestDto rentHistoryRentRequestDto) throws RentHistoryCarAvailableException {
-        return rentHistoryAdder.rentCar(rentHistoryRentRequestDto);
+    public RentHistoryWithRentDataDto rentCar(RentHistoryRequestDto rentHistoryRequestDto) throws RentHistoryCarAvailableException {
+        return rentHistoryAdder.rentCar(rentHistoryRequestDto);
     }
     public RentHistoryWithDataDto returnCar(RentHistoryReturnRequestDto rentHistoryReturnRequestDto) throws RentHistoryCarAvailableException {
         return rentHistoryUpdater.returnCar(rentHistoryReturnRequestDto);

@@ -23,7 +23,7 @@ class CustomerMapper {
                 customer.getId(),
                 customer.getName(),
                 customer.getLastName(),
-                customer.getPesel(),
+                customer.getAddress(),
                 customer.getZipCode(),
                 customer.getTown(),
                 customer.getPesel(),
@@ -35,6 +35,7 @@ class CustomerMapper {
 
      static Customer customerDtoToCustomer(CustomerDto customerDto){
         return new Customer(
+                customerDto.id(),
                 customerDto.name(),
                 customerDto.lastName(),
                 customerDto.address(),

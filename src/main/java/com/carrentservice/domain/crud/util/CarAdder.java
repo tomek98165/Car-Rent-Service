@@ -14,6 +14,7 @@ class CarAdder {
 
     CarDto addCar(final CarRequestDto carRequestDto){
         Car newCar = CarMapper.CarRequestDtoToCar(carRequestDto);
+        newCar.setAvailability(true);
         Car savedCar = carRepository.save(newCar);
         return CarMapper.CarToCartDto(savedCar);
     }

@@ -1,44 +1,127 @@
 package com.carrentservice.domain.crud.util;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+
+import org.springframework.data.domain.*;
 import org.springframework.data.repository.query.FluentQuery;
 
-import java.util.List;
-import java.util.Optional;
+
+import java.util.*;
 import java.util.function.Function;
 
 public class InMemoryRentHistoryRepositoryImpl implements RentHistoryRepository{
+    private final Map<Long, RentHistory> db = new HashMap<>();
+    private long idCounter = 1;
     @Override
-    public List<RentHistory> findByReturnDateIsNull(Pageable pageable) {
-        return null;
+    public Optional<RentHistory> findById(Long aLong) {
+        return Optional.ofNullable(db.get(aLong));
     }
 
     @Override
-    public List<RentHistory> findByCustomerId(Long id, Pageable pageable) {
-        return null;
+    public Page<RentHistory> findByReturnDateIsNull(Pageable pageable) {
+        List<RentHistory> filtered = db.values().stream()
+                .filter(rentHistory -> rentHistory.getReturnDate().equals(null))
+                .toList();
+
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filtered.size());
+
+        List<RentHistory> pagedRentHistory = start < filtered.size() ? filtered.subList(start, end): List.of();
+        return new PageImpl<>(pagedRentHistory, pageable, filtered.size());
     }
 
     @Override
-    public List<RentHistory> findByCustomerIdAndReturnDateIsNull(Long id, Pageable pageable) {
-        return null;
+    public Page<RentHistory> findByCustomerId(Long id, Pageable pageable) {
+        List<RentHistory> filtered =  db.values().stream()
+                .filter(rentHistory -> rentHistory.getCustomer().getId().equals(id))
+                .toList();
+
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filtered.size());
+
+        List<RentHistory> pagedRentHistory = start < filtered.size() ? filtered.subList(start, end): List.of();
+        return new PageImpl<>(pagedRentHistory, pageable, filtered.size());
     }
 
     @Override
-    public List<RentHistory> findByCarId(Long id, Pageable pageable) {
-        return null;
+    public Page<RentHistory> findByCustomerIdAndReturnDateIsNull(Long id, Pageable pageable) {
+        List<RentHistory> filtered = db.values().stream()
+                .filter(rentHistory -> rentHistory.getReturnDate().equals(null))
+                .filter(rentHistory -> rentHistory.getCustomer().getId().equals(id))
+                .toList();
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filtered.size());
+
+        List<RentHistory> pagedRentHistory = start < filtered.size() ? filtered.subList(start, end): List.of();
+        return new PageImpl<>(pagedRentHistory, pageable, filtered.size());
+    }
+
+    @Override
+    public Page<RentHistory> findByCarId(Long id, Pageable pageable) {
+        List<RentHistory> filtered = db.values().stream()
+                .filter(rentHistory -> rentHistory.getCar().getId().equals(id))
+                .toList();
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), filtered.size());
+
+        List<RentHistory> pagedRentHistory = start < filtered.size() ? filtered.subList(start, end): List.of();
+        return new PageImpl<>(pagedRentHistory, pageable, filtered.size());
     }
 
     @Override
     public Optional<RentHistory> findByCarIdAndReturnDateIsNull(Long id) {
-        return Optional.empty();
+        return db.values().stream()
+                .filter(rentHistory -> rentHistory.getCar().getId().equals(id))
+                .findAny();
     }
 
     @Override
     public Optional<RentHistory> findTopByCarIdOrderByReturnDateDesc(Long id) {
-        return Optional.empty();
+        return db.values().stream()
+                .filter(
+                        rentHistory -> rentHistory.getCar().getId().equals(id)
+                                && rentHistory.getReturnDate() != null
+                )
+                .max(Comparator.comparing(RentHistory::getReturnDate));
+    }
+
+    @Override
+    public <S extends RentHistory> S save(S entity) {
+        if(!findById(entity.getId()).isEmpty()){
+            RentHistory rentHistory = new RentHistory(
+                    entity.getId(),
+                    entity.getCar(),
+                    entity.getCustomer(),
+                    entity.getEmployeeRent(),
+                    entity.getRentDate()
+
+            );
+            rentHistory.setReturnDate(entity.getReturnDate());
+            rentHistory.setEmployeeReturn(entity.getEmployeeReturn());
+            db.put(entity.getId(), rentHistory);
+            return (S)rentHistory;
+        }
+        else{
+            RentHistory rentHistory = new RentHistory(
+                    idCounter,
+                    entity.getCar(),
+                    entity.getCustomer(),
+                    entity.getEmployeeRent(),
+                    entity.getRentDate()
+            );
+            db.put(idCounter, rentHistory);
+            idCounter++;
+            return (S)rentHistory;
+        }
+    }
+
+    @Override
+    public Page<RentHistory> findAll(Pageable pageable) {
+        List<RentHistory> rentHistories = new ArrayList<>(db.values());
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), rentHistories.size());
+
+        List<RentHistory> pagedRentHistories= start < rentHistories.size() ? rentHistories.subList(start, end): List.of();
+        return new PageImpl<>(pagedRentHistories, pageable, rentHistories.size());
     }
 
     @Override
@@ -122,18 +205,8 @@ public class InMemoryRentHistoryRepositoryImpl implements RentHistoryRepository{
     }
 
     @Override
-    public <S extends RentHistory> S save(S entity) {
-        return null;
-    }
-
-    @Override
     public <S extends RentHistory> List<S> saveAll(Iterable<S> entities) {
         return null;
-    }
-
-    @Override
-    public Optional<RentHistory> findById(Long aLong) {
-        return Optional.empty();
     }
 
     @Override
@@ -183,11 +256,6 @@ public class InMemoryRentHistoryRepositoryImpl implements RentHistoryRepository{
 
     @Override
     public List<RentHistory> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page<RentHistory> findAll(Pageable pageable) {
         return null;
     }
 }

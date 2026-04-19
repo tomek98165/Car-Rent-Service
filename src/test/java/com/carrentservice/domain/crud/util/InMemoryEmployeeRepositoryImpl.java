@@ -1,19 +1,68 @@
 package com.carrentservice.domain.crud.util;
 
-import org.springframework.data.domain.Example;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.dao.DuplicateKeyException;
+import org.springframework.data.domain.*;
 import org.springframework.data.repository.query.FluentQuery;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Function;
 
 public class InMemoryEmployeeRepositoryImpl implements EmployeeRepository{
+    private final Map<Long, Employee> db = new HashMap<>();
+    private long idCounter = 1;
+    @Override
+    public Page<Employee> findAll(Pageable pageable) {
+        List<Employee> employees = new ArrayList<>(db.values());
+        int start = (int) pageable.getOffset();
+        int end = Math.min(start + pageable.getPageSize(), employees.size());
+
+        List<Employee> pagedEmployees = start < employees.size() ? employees.subList(start, end): List.of();
+        return new PageImpl<>(pagedEmployees, pageable, employees.size());
+    }
+
     @Override
     public Optional<Employee> findByUsername(String username) {
-        return Optional.empty();
+        return db.values().stream()
+                .filter(employee -> Objects.equals(employee.getUsername(), username))
+                .findFirst();
+    }
+
+    @Override
+    public Optional<Employee> findById(Long aLong) {
+        return Optional.ofNullable(db.get(aLong));
+    }
+
+    @Override
+    public <S extends Employee> S save(S entity) {
+        if(!findById(entity.getId()).isEmpty()){
+            Employee employee = new Employee(
+                    entity.getId(),
+                    entity.getName(),
+                    entity.getLastName(),
+                    entity.getUsername(),
+                    entity.getPassword(),
+                    entity.getAuthorities()
+            );
+            db.put(entity.getId(), employee);
+            return (S)employee;
+        }
+        else if(findByUsername(entity.getUsername()).isEmpty()){
+            Employee employee = new Employee(
+                    idCounter,
+                    entity.getName(),
+                    entity.getLastName(),
+                    entity.getUsername(),
+                    entity.getPassword(),
+                    entity.getAuthorities()
+            );
+            db.put(idCounter, employee);
+            idCounter++;
+            return (S)employee;
+        }else{
+            throw new DuplicateKeyException("Employee with username: " + entity.getUsername() + " already exist");
+        }
+
+
     }
 
     @Override
@@ -97,18 +146,8 @@ public class InMemoryEmployeeRepositoryImpl implements EmployeeRepository{
     }
 
     @Override
-    public <S extends Employee> S save(S entity) {
-        return null;
-    }
-
-    @Override
     public <S extends Employee> List<S> saveAll(Iterable<S> entities) {
         return null;
-    }
-
-    @Override
-    public Optional<Employee> findById(Long aLong) {
-        return Optional.empty();
     }
 
     @Override
@@ -158,11 +197,6 @@ public class InMemoryEmployeeRepositoryImpl implements EmployeeRepository{
 
     @Override
     public List<Employee> findAll(Sort sort) {
-        return null;
-    }
-
-    @Override
-    public Page<Employee> findAll(Pageable pageable) {
         return null;
     }
 }

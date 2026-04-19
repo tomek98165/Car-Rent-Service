@@ -5,7 +5,6 @@ public record CarRequestDto(
         String model,
         String licensePlate,
         String description,
-        int year,
-        boolean availability
+        int year
 ) {
 }

@@ -14,9 +14,6 @@ class Customer {
    @Column(nullable = false)
    private String lastName;
    private String address;
-
-
-
    private String zipCode;
    private String town;
    @Column(unique = true, nullable = false)
@@ -30,11 +27,8 @@ class Customer {
    @Column(unique = true)
    private String email;
 
-   public Customer() {
-   }
-
-
-   public Customer(String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
+   public Customer(Long id, String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
+      this.id = id;
       this.name = name;
       this.lastName = lastName;
       this.address = address;
@@ -47,91 +41,107 @@ class Customer {
       this.email = email;
    }
 
-   public Long getId() {
-      return id;
+   Customer(String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
+      this.name = name;
+      this.lastName = lastName;
+      this.address = address;
+      this.zipCode = zipCode;
+      this.town = town;
+      this.pesel = pesel;
+      this.birthDate = birthDate;
+      Gender = gender;
+      this.phoneNumber = phoneNumber;
+      this.email = email;
    }
 
-   public void setId(Long id) {
+   protected Customer() {
+
+   }
+
+   Long getId() {
+      return id;
+   }
+   void setId(Long id) {
       this.id = id;
    }
 
-   public String getName() {
+   String getName() {
       return name;
    }
 
-   public void setName(String name) {
+   void setName(String name) {
       this.name = name;
    }
 
-   public String getLastName() {
+   String getLastName() {
       return lastName;
    }
 
-   public void setLastName(String lastName) {
+   void setLastName(String lastName) {
       this.lastName = lastName;
    }
 
-   public String getAddress() {
+   String getAddress() {
       return address;
    }
 
-   public void setAddress(String address) {
+   void setAddress(String address) {
       this.address = address;
    }
 
-   public String getZipCode() {
+   String getZipCode() {
       return zipCode;
    }
 
-   public void setZipCode(String zipCode) {
+   void setZipCode(String zipCode) {
       this.zipCode = zipCode;
    }
 
-   public String getTown() {
+   String getTown() {
       return town;
    }
 
-   public void setTown(String town) {
+   void setTown(String town) {
       this.town = town;
    }
 
-   public String getPesel() {
+   String getPesel() {
       return pesel;
    }
 
-   public void setPesel(String pesel) {
+   void setPesel(String pesel) {
       this.pesel = pesel;
    }
 
-   public Date getBirthDate() {
+   Date getBirthDate() {
       return birthDate;
    }
 
-   public void setBirthDate(Date birthDate) {
+   void setBirthDate(Date birthDate) {
       this.birthDate = birthDate;
    }
 
-   public com.carrentservice.domain.crud.util.Gender getGender() {
+   com.carrentservice.domain.crud.util.Gender getGender() {
       return Gender;
    }
 
-   public void setGender(com.carrentservice.domain.crud.util.Gender gender) {
+   void setGender(com.carrentservice.domain.crud.util.Gender gender) {
       Gender = gender;
    }
 
-   public String getPhoneNumber() {
+   String getPhoneNumber() {
       return phoneNumber;
    }
 
-   public void setPhoneNumber(String phoneNumber) {
+   void setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
    }
 
-   public String getEmail() {
+   String getEmail() {
       return email;
    }
 
-   public void setEmail(String email) {
+   void setEmail(String email) {
       this.email = email;
    }
 }
