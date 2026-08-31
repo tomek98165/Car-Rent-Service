@@ -1,7 +1,6 @@
 package com.carrentservice.domain.crud.util;
 
 import jakarta.persistence.*;
-import org.springframework.data.annotation.CreatedDate;
 
 
 import java.time.Instant;
@@ -24,14 +23,13 @@ class RentHistory {
     @JoinColumn(name = "employee_return_id")
     private Employee employeeReturn;
 
-    @CreatedDate
     private Instant rentDate;
     private Instant returnDate;
 
-    public RentHistory() {
+    protected RentHistory() {
     }
 
-    public RentHistory(Long id, Car car, Customer customer, Employee employeeRent, Employee employeeReturn, Instant rentDate, Instant returnDate) {
+    RentHistory(Long id, Car car, Customer customer, Employee employeeRent, Employee employeeReturn, Instant rentDate, Instant returnDate) {
         this.id = id;
         this.car = car;
         this.customer = customer;
@@ -41,66 +39,75 @@ class RentHistory {
         this.returnDate = returnDate;
     }
 
-    public RentHistory(Car car, Customer customer, Employee employeeRent) {
+    RentHistory(Car car, Customer customer, Employee employeeRent, Instant rentDate) {
         this.car = car;
         this.customer = customer;
         this.employeeRent = employeeRent;
-    }
-
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Car getCar() {
-        return car;
-    }
-
-    public void setCar(Car car) {
-        this.car = car;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Employee getEmployeeRent() {
-        return employeeRent;
-    }
-
-    public void setEmployeeRent(Employee employeeRent) {
-        this.employeeRent = employeeRent;
-    }
-
-    public Employee getEmployeeReturn() {
-        return employeeReturn;
-    }
-
-    public void setEmployeeReturn(Employee employeeReturn) {
-        this.employeeReturn = employeeReturn;
-    }
-
-    public Instant getRentDate() {
-        return rentDate;
-    }
-
-    public void setRentDate(Instant rentDate) {
         this.rentDate = rentDate;
     }
 
-    public Instant getReturnDate() {
+    public RentHistory(Long id, Car car, Customer customer, Employee employeeRent, Instant rentDate) {
+        this.id = id;
+        this.car = car;
+        this.customer = customer;
+        this.employeeRent = employeeRent;
+        this.rentDate = rentDate;
+    }
+
+
+    Long getId() {
+        return id;
+    }
+
+    void setId(Long id) {
+        this.id = id;
+    }
+
+    Car getCar() {
+        return car;
+    }
+
+    void setCar(Car car) {
+        this.car = car;
+    }
+
+    Customer getCustomer() {
+        return customer;
+    }
+
+    void setCustomer(Customer customer) {
+        this.customer = customer;
+    }
+
+    Employee getEmployeeRent() {
+        return employeeRent;
+    }
+
+    void setEmployeeRent(Employee employeeRent) {
+        this.employeeRent = employeeRent;
+    }
+
+    Employee getEmployeeReturn() {
+        return employeeReturn;
+    }
+
+    void setEmployeeReturn(Employee employeeReturn) {
+        this.employeeReturn = employeeReturn;
+    }
+
+    Instant getRentDate() {
+        return rentDate;
+    }
+
+    void setRentDate(Instant rentDate) {
+        this.rentDate = rentDate;
+    }
+
+    Instant getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(Instant returnDate) {
+    void setReturnDate(Instant returnDate) {
         this.returnDate = returnDate;
     }
 }

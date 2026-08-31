@@ -22,8 +22,7 @@ class CarMapper {
                 carDto.model(),
                 carDto.licensePlate(),
                 carDto.description(),
-                carDto.year(),
-                carDto.availability());
+                carDto.year());
     }
 
     static CarDto CarToCartDto(Car car) {

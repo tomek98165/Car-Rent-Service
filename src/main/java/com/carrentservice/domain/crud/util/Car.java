@@ -17,75 +17,74 @@ class Car{
     private int year;
     private boolean availability;
 
-    public Long getId() {
+     Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+     void setId(Long id) {
         this.id = id;
     }
 
-    public String getMake() {
+     String getMake() {
         return make;
     }
 
-    public void setMake(String make) {
+     void setMake(String make) {
         this.make = make;
     }
 
-    public String getModel() {
+     String getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+     void setModel(String model) {
         this.model = model;
     }
 
-    public String getLicensePlate() {
+     String getLicensePlate() {
         return licensePlate;
     }
 
-    public void setLicensePlate(String vin) {
+     void setLicensePlate(String vin) {
         this.licensePlate = vin;
     }
 
-    public String getDescription() {
+     String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+     void setDescription(String description) {
         this.description = description;
     }
 
-    public int getYear() {
+     int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+     void setYear(int year) {
         this.year = year;
     }
 
-    public boolean isAvailability() {
+     boolean isAvailability() {
         return availability;
     }
 
-    public void setAvailability(boolean availability) {
+     void setAvailability(boolean availability) {
         this.availability = availability;
     }
 
-    Car(String make, String model, String licensePlate, String description, int year, boolean availability) {
+    Car(String make, String model, String licensePlate, String description, int year) {
         this.make = make;
         this.model = model;
         this.licensePlate = licensePlate;
         this.description = description;
         this.year = year;
-        this.availability = availability;
     }
 
-    public Car() {
+    protected Car() {
     }
 
-    public Car(Long id, String make, String model, String licensePlate, String description, int year, boolean availability) {
+     Car(Long id, String make, String model, String licensePlate, String description, int year, boolean availability) {
         this.id = id;
         this.make = make;
         this.model = model;

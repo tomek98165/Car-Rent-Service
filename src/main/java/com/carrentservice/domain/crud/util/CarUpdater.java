@@ -15,9 +15,17 @@ class CarUpdater {
 
     public void changeAvailabilityCar(Long id){
         CarDto car = carRetriever.findCarById(id);
+        car = new CarDto(
+                car.id(),
+                car.make(),
+                car.model(),
+                car.licensePlate(),
+                car.description(),
+                car.year(),
+                !car.availability()
+        );
         Car updateCar = CarMapper.carDtoToCar(car);
-        updateCar.setAvailability(!updateCar.isAvailability());
-        Car updatedCar = carRepository.save(updateCar);
+        carRepository.save(updateCar);
     }
 
 

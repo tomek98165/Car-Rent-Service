@@ -16,7 +16,8 @@ class CarRetriever {
     }
 
     Set<CarDto> findAllCars(Pageable pageable){
-        return carRepository.findAll(pageable)
+//        Pageable pageable = PageRequest.of(0,Integer.MAX_VALUE);
+        return carRepository.findAll(pageable).getContent()
                 .stream()
                     .map(CarMapper::CarToCartDto)
                     .collect(Collectors.toSet());
