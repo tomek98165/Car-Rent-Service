@@ -11,8 +11,8 @@ class Car{
     private Long id;
     private String make;
     private String model;
-    @Column(unique = true, length = 17)
-    private String vin;
+    @Column(unique = true)
+    private String licensePlate;
     private String description;
     private int year;
     private boolean availability;
@@ -41,12 +41,12 @@ class Car{
         this.model = model;
     }
 
-    public String getVin() {
-        return vin;
+    public String getLicensePlate() {
+        return licensePlate;
     }
 
-    public void setVin(String vin) {
-        this.vin = vin;
+    public void setLicensePlate(String vin) {
+        this.licensePlate = vin;
     }
 
     public String getDescription() {
@@ -73,10 +73,10 @@ class Car{
         this.availability = availability;
     }
 
-    Car(String make, String model, String vin, String description, int year, boolean availability) {
+    Car(String make, String model, String licensePlate, String description, int year, boolean availability) {
         this.make = make;
         this.model = model;
-        this.vin = vin;
+        this.licensePlate = licensePlate;
         this.description = description;
         this.year = year;
         this.availability = availability;
@@ -85,11 +85,11 @@ class Car{
     public Car() {
     }
 
-    public Car(Long id, String make, String model, String vin, String description, int year, boolean availability) {
+    public Car(Long id, String make, String model, String licensePlate, String description, int year, boolean availability) {
         this.id = id;
         this.make = make;
         this.model = model;
-        this.vin = vin;
+        this.licensePlate = licensePlate;
         this.description = description;
         this.year = year;
         this.availability = availability;

@@ -40,9 +40,9 @@ public class CarRestController {
     ResponseEntity<CarDto> getCarById(@PathVariable Long id){
         return ResponseEntity.ok(carRentServiceCrudFacade.findCarById(id));
     }
-    @GetMapping("/vin/{vin}")
-    ResponseEntity<CarDto> getCarByVin(@PathVariable String vin){
-        return ResponseEntity.ok(carRentServiceCrudFacade.findCarByVin(vin));
+    @GetMapping("/vin/{licensePlate}")
+    ResponseEntity<CarDto> getCarByVin(@PathVariable String licensePlate){
+        return ResponseEntity.ok(carRentServiceCrudFacade.findCarByLicensePlate(licensePlate));
     }
     @GetMapping("/{make}/{model}")
     ResponseEntity<AllCarsDto> getAllCarsByMakeAndModel(@PathVariable("make") String make, @PathVariable("model") String model){
@@ -55,9 +55,5 @@ public class CarRestController {
         return ResponseEntity.ok(new AllCarsDto(cars));
     }
 
-    @PutMapping("/{id}")
-    ResponseEntity<CarDto> updateAvailabilityCar(@PathVariable Long id){
-        return ResponseEntity.ok(carRentServiceCrudFacade.updateAvailabilityCar(id));
-    }
 
 }

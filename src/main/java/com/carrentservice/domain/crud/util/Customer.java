@@ -9,18 +9,23 @@ class Customer {
    @Id
    @GeneratedValue(strategy = GenerationType.AUTO)
    private Long id;
+   @Column(nullable = false)
    private String name;
+   @Column(nullable = false)
    private String lastName;
    private String address;
+
+
+
    private String zipCode;
    private String town;
-   @Column(unique = true)
+   @Column(unique = true, nullable = false)
    private String pesel;
    private Date birthDate;
    @Enumerated(EnumType.STRING)
    private Gender Gender;
-   @Column(unique = true, length = 9)
-   private char[] phoneNumber;
+   @Column(unique = true, length = 9, nullable = false)
+   private String phoneNumber;
 
    @Column(unique = true)
    private String email;
@@ -28,21 +33,8 @@ class Customer {
    public Customer() {
    }
 
-   public Customer(Long id, String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, char[] phoneNumber, String email) {
-      this.id = id;
-      this.name = name;
-      this.lastName = lastName;
-      this.address = address;
-      this.zipCode = zipCode;
-      this.town = town;
-      this.pesel = pesel;
-      this.birthDate = birthDate;
-      Gender = gender;
-      this.phoneNumber = phoneNumber;
-      this.email = email;
-   }
 
-   public Customer(String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, char[] phoneNumber, String email) {
+   public Customer(String name, String lastName, String address, String zipCode, String town, String pesel, Date birthDate, com.carrentservice.domain.crud.util.Gender gender, String phoneNumber, String email) {
       this.name = name;
       this.lastName = lastName;
       this.address = address;
@@ -127,11 +119,11 @@ class Customer {
       Gender = gender;
    }
 
-   public char[] getPhoneNumber() {
+   public String getPhoneNumber() {
       return phoneNumber;
    }
 
-   public void setPhoneNumber(char[] phoneNumber) {
+   public void setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
    }
 

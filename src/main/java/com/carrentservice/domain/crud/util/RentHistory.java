@@ -1,10 +1,10 @@
 package com.carrentservice.domain.crud.util;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
 
 
-import java.time.LocalDateTime;
-
+import java.time.Instant;
 
 @Entity
 class RentHistory {
@@ -12,20 +12,26 @@ class RentHistory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
     @ManyToOne
+    @JoinColumn(name = "customer_id")
     private Customer customer;
     @ManyToOne
+    @JoinColumn(name = "employee_rent_id")
     private Employee employeeRent;
     @ManyToOne
+    @JoinColumn(name = "employee_return_id")
     private Employee employeeReturn;
-    private LocalDateTime rentDate;
-    private LocalDateTime returnDate;
+
+    @CreatedDate
+    private Instant rentDate;
+    private Instant returnDate;
 
     public RentHistory() {
     }
 
-    public RentHistory(Long id, Car car, Customer customer, Employee employeeRent, Employee employeeReturn, LocalDateTime rentDate, LocalDateTime returnDate) {
+    public RentHistory(Long id, Car car, Customer customer, Employee employeeRent, Employee employeeReturn, Instant rentDate, Instant returnDate) {
         this.id = id;
         this.car = car;
         this.customer = customer;
@@ -35,12 +41,12 @@ class RentHistory {
         this.returnDate = returnDate;
     }
 
-    public RentHistory(Car car, Customer customer, Employee employeeRent, LocalDateTime rentDate) {
+    public RentHistory(Car car, Customer customer, Employee employeeRent) {
         this.car = car;
         this.customer = customer;
         this.employeeRent = employeeRent;
-        this.rentDate = rentDate;
     }
+
 
     public Long getId() {
         return id;
@@ -82,19 +88,19 @@ class RentHistory {
         this.employeeReturn = employeeReturn;
     }
 
-    public LocalDateTime getRentDate() {
+    public Instant getRentDate() {
         return rentDate;
     }
 
-    public void setRentDate(LocalDateTime rentDate) {
+    public void setRentDate(Instant rentDate) {
         this.rentDate = rentDate;
     }
 
-    public LocalDateTime getReturnDate() {
+    public Instant getReturnDate() {
         return returnDate;
     }
 
-    public void setReturnDate(LocalDateTime returnDate) {
+    public void setReturnDate(Instant returnDate) {
         this.returnDate = returnDate;
     }
 }

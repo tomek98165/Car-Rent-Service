@@ -2,8 +2,7 @@ package com.carrentservice.domain.crud.util;
 
 import jakarta.persistence.*;
 
-
-import java.util.List;
+import java.util.Set;
 
 @Entity
 class Employee {
@@ -15,29 +14,26 @@ class Employee {
     @Column(unique = true)
     private String username;
     private String password;
-    private List<Authorities> authorities;
-    boolean active;
+    private Set<Authorities> authorities;
 
     public Employee() {
     }
 
-    public Employee(String name, String lastName, String username, String password, List<Authorities> authorities, boolean active) {
+    public Employee(String name, String lastName, String username, String password) {
         this.name = name;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
-        this.authorities = authorities;
-        this.active = active;
+
     }
 
-    public Employee(Long id, String name, String lastName, String username, String password, List<Authorities> authorities, boolean active) {
+    public Employee(Long id, String name, String lastName, String username, String password, Set<Authorities> authorities) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.username = username;
         this.password = password;
         this.authorities = authorities;
-        this.active = active;
     }
 
     public Long getId() {
@@ -80,19 +76,12 @@ class Employee {
         this.password = password;
     }
 
-    public List<Authorities> getAuthorities() {
+    public Set<Authorities> getAuthorities() {
         return authorities;
     }
 
-    public void setAuthorities(List<Authorities> authorities) {
+    public void setAuthorities(Set<Authorities> authorities) {
         this.authorities = authorities;
     }
 
-    public boolean isActive() {
-        return active;
-    }
-
-    public void setActive(boolean active) {
-        this.active = active;
-    }
 }
